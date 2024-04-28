@@ -1,0 +1,29 @@
+/*tamaño de fuente*/
+
+body {
+    font-family:Arial, sans-serif;
+    font-size: 16px;
+}
+
+/* Espaciado entre elementos */
+header,
+section,
+footer,
+article {
+    margin: 2px;
+}
+
+
+p {
+    border-radius: 5px;
+ 
+ 
+}
+
+iframe {
+    border-radius: 5px;
+   
+}
+
+
+

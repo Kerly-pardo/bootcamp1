@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Use the forms tags</title>
+    <style>
+        button {
+            background-color: green;
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <form action="/submit" method="post">
+        <label for="name">Name:</label> <br>
+        <input type="text" id="name" name="name" placeholder="Ingrese su nombre"> <br>
+
+        <label for="email">Email:</label> <br>
+        <input type="email" id="email" name="name" placeholder="Ingrese su correo"> <br>
+
+        <label for="bio">Add your bio:</label> <br>
+        <textarea id="bio" name="bio" rows="4" cols="50"></textarea> <br>
+
+        <label for="gender">Choose your gender from the list:</label>
+        <input list="genders" id="gender" name="gender">
+        <datalist id="genders">
+            <option value="Male">
+            <option value="Female">
+            <option value="Other">
+        </datalist>
+        <fieldset>
+            <legend> Choose the Browser to use:</legend>
+            <label><input type="radio" name="browser" value="Edge"> Chrome</label>
+            <label><input type="radio" name="browser" value="Safari"> Safari</label>
+            <label><input type="radio" name="browser" value="Safari"> Opera</label>
+            <label><input type="radio" name="browser" value="Safari"> Firefox</label>
+            <label><input type="radio" name="browser" value="Safari"> Edge</label>
+        </fieldset><br>
+
+
+        <button type="submit" id="button">Enviar</button>
+
+    </form>
+
+</body>
+
+</html>
