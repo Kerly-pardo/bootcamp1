@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Use the image tags</title>
+</head>
+
+<body>
+  <section>
+    <img src="https://via.placeholder.com/480x480.png/FF5533" alt="img_480x480.png">
+  </section>
+  <figure>
+    <img src="https://via.placeholder.com/580x680.png/AA55FF" alt="img_580x680.png">
+    <figcaption> Figura de Rectángulo de 580x680</figcaption>
+  </figure>
+
+  <picture>
+    <source media="(max-width:360px) " srcset="https://via.placeholder.com/360x100.png/BB5500">
+    <source media="(max-width:412px)" srcset="https://via.placeholder.com/412x100.png/55AA00">
+    <source media="(max-width:1536px) " srcset="https://via.placeholder.com/1536x100.png/FFAA99">
+    <source media="(max-width:1920)  " srcset="https://via.placeholder.com/1920x100.png/99BC11">
+    <img src="https://via.placeholder.com/1536x100.png/99BC11" alt="img">
+  </picture>
+
+
+</body>
+
+</html>
