@@ -1,0 +1,513 @@
+openapi: 3.0.3
+info:
+  title: Swagger for ProductWeb
+  version: 1.2.8
+  description: Swagger for API of ProductWeb
+  contact:
+    email: kerlydayanapardo@gmail.com
+    name: Kerly Dayana Pardo Rivera
+    url: 'https://github.com/Kerly-pardo'
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+servers:
+  - url: 'http://localhost:3001/api/v1/'
+tags:
+  - name: users
+    description: Operations about users
+  - name: products
+    description: Operations about products
+paths:
+  /users:
+    get:
+      tags:
+        - users
+      security:
+        - bearerAuth: []
+      summary: Get all users
+      description: Get all users in the platform.
+      operationId: getAllUsers
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UsersDetailResponse'
+        '401':
+          description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        '404':
+          description: User not found
+          content: {}
+  /users/create:
+    post:
+      tags:
+        - users
+      summary: Create user
+      description: This can only be done by the logged in user.
+      operationId: createUser
+      requestBody:
+        description: Created user object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsersCreateRequest'
+        required: true
+      responses:
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersDetailResponse'
+        '400':
+          description: Invalid id supplied
+          content: {}
+        '404':
+          description: User not found
+          content: {}
+  /users/{email}/detail:
+    get:
+      tags:
+        - users
+      security:
+        - bearerAuth: []
+      summary: Get user by email
+      description: Detail user by email in the platform.
+      operationId: getUserByEmail
+      parameters:
+        - name: email
+          in: path
+          description: The email that needs to be fetched. Use user1 for testing.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersDetailResponse'
+        '401':
+          description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        '404':
+          description: User not found
+          content: {}
+  /users/{email}/update:
+    put:
+      tags:
+        - users
+      security:
+        - bearerAuth: []
+      summary: Updated user by email
+      description: Update user by email. The user only can change phone, firstname, and lastname in the platform.
+      operationId: updateUserByEmail
+      parameters:
+        - name: email
+          in: path
+          description: email that need to be updated
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Updated user object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsersUpdateRequest'
+        required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersDetailResponse'
+        '401':
+          description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        '404':
+          description: User not found
+          content: {}
+  /users/{email}/delete:
+    delete:
+      tags:
+        - users
+      security:
+        - bearerAuth: []
+      summary: Delete user by email
+      description: Delete user by email but is soft delete
+      operationId: deleteUserByEmail
+      parameters:
+        - name: email
+          in: path
+          description: The email that needs to be deleted
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No content
+          content: {}
+        '401':
+          description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        '404':
+          description: User not found
+          content: {}
+  /users/authenticate:
+    post:
+      tags:
+        - users
+      summary: User authenticate by email and password
+      description: Auth users on the platform by email and password, and generate token for session
+      operationId: authenticate
+      requestBody:
+        description: Auth user object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsersAuthenticateRequest'
+        required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersAuthenticateResponse'
+        '404':
+          description: User not found
+          content: {}
+  /products:
+    get:
+      tags:
+        - products
+      security:
+        - bearerAuth: []
+      summary: Get all products
+      description: Get all products in the platform.
+      operationId: getAllProducts
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductsDetailResponse'
+        '401':
+          description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        '404':
+          description: Products not found
+          content: {}
+  /products/create:
+    post:
+      tags:
+        - products
+      summary: Create product
+      description: This can only be done by the logged in user.
+      operationId: createProduct
+      requestBody:
+        description: Created product object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductsCreateRequest'
+        required: true
+      responses:
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductsDetailResponse'
+        '400':
+          description: Invalid id supplied
+          content: {}
+        '404':
+          description: Product not found
+          content: {}
+  /products/{productName}/detail:
+    get:
+      tags:
+        - products
+      security:
+        - bearerAuth: []
+      summary: Get product by productName
+      description: Detail product by productName
+      operationId: getProductByProductName
+      parameters:
+        - name: productName
+          in: path
+          description: detail product by productName
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductsDetailResponse'
+        '401':
+          description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        '404':
+          description: Product not found
+          content: {}
+  /products/{productName}/update:
+    put:
+      tags:
+        - products
+      security:
+        - bearerAuth: []
+      summary: Updated product by productName
+      description: Updated product by productName
+      operationId: updateProductByProductName
+      parameters:
+        - name: productName
+          in: path
+          description: productName that needs to be updated
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Updated product object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductsUpdateRequest'
+        required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductsDetailResponse'
+        '401':
+          description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        '404':
+          description: Product not found
+          content: {}
+  /products/{productName}/delete:
+    delete:
+      tags:
+        - products
+      security:
+        - bearerAuth: []
+      summary: Delete product by productName
+      description: Delete product by productName
+      operationId: deleteProductByProductName
+      parameters:
+        - name: productName
+          in: path
+          description: The product that needs to be deleted
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No content
+          content: {}
+        '401':
+          description: Invalid token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        '404':
+          description: Product not found
+          content: {}
+components:
+  schemas:
+    UsersDetailResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: User identification
+          format: int64
+        firstname:
+          type: string
+          description: User firstname
+        lastname:
+          type: string
+          description: User lastname or surname
+        email:
+          type: string
+          description: User email
+        phone:
+          type: string
+          description: User phone max. 10 digits
+        status:
+          type: boolean
+          description: User status
+    UsersCreateRequest:
+      type: object
+      properties:
+        firstname:
+          type: string
+          description: User firstname
+        lastname:
+          type: string
+          description: User lastname or surname
+        email:
+          type: string
+          description: User email
+        phone:
+          type: string
+          description: User phone max. 10 digits
+        password:
+          type: string
+          description: User password between 8 to 20 chars
+    UsersUpdateRequest:
+      type: object
+      properties:
+        firstname:
+          type: string
+          description: User firstname
+        lastname:
+          type: string
+          description: User lastname or surname
+        phone:
+          type: string
+          description: User phone max. 10 digits
+    UsersAuthenticateRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          description: User alias or email
+        password:
+          type: string
+          description: User password between 8 to 20 chars
+    UsersAuthenticateResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: User identification
+          format: int64
+        firstname:
+          type: string
+          description: User firstname
+        lastname:
+          type: string
+          description: User lastname or surname
+        email:
+          type: string
+          description: User email
+        phone:
+          type: string
+          description: User phone max. 10 digits
+        token:
+          type: string
+          description: Bearer token
+    ProductsDetailResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: id Product
+          format: int64
+        productName:
+          type: string
+          description: Product productName min. 4 chars
+        productType:
+          type: string
+          description: Product productType min. 6 chars
+        quantity:
+          type: number
+          description: Product quantity min. 1 digits
+        price:
+          type: number
+          description: Product price min. 5 digits
+        latitude:
+          type: string
+          description: Product latitude min. 6 chars
+        longitude:
+          type: string
+          description: Product longitude min. 6 chars
+        status:
+          type: boolean
+          description: Product status
+    ProductsCreateRequest:
+      type: object
+      properties:
+        productName:
+          type: string
+          description: Product productName min. 4 chars
+        productType:
+          type: string
+          description: Product productType min. 6 chars
+        quantity:
+          type: number
+          description: Product quantity min. 1 digits
+        price:
+          type: number
+          description: Product price min. 5 digits
+        latitude:
+          type: string
+          description: Product latitude min. 6 chars
+        longitude:
+          type: string
+          description: Product longitude min. 6 chars
+    ProductsUpdateRequest:
+      type: object
+      properties:
+        productType:
+          type: string
+          description: Product productType min. 6 chars
+        quantity:
+          type: number
+          description: Product quantity min. 1 digits
+        price:
+          type: number
+          description: Product price min. 6 digits
+        latitude:
+          type: string
+          description: Product latitude min. 6 chars
+        longitude:
+          type: string
+          description: Product longitude min. 6 chars
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT  # optional, for documentation purposes only
+security:
+  - bearerAuth: []

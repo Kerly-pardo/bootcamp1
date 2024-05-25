@@ -1,0 +1,8 @@
+[{"id":1,"name":"Wakami Seaweed","product_type":38,"quantity":49,"price":"$66.74","latitude":-7.3440911,"longitude":107.9917034},
+{"id":2,"name":"Napkin White","product_type":34,"quantity":60,"price":"$51.73","latitude":-5.8949347,"longitude":-35.4343604},
+{"id":3,"name":"Flour - Cake","product_type":49,"quantity":29,"price":"$31.26","latitude":16.2850333,"longitude":95.6799816},
+{"id":4,"name":"Bread - Multigrain","product_type":37,"quantity":18,"price":"$82.45","latitude":50.9872632,"longitude":20.6630795},
+{"id":5,"name":"Apple - Granny Smith","product_type":38,"quantity":84,"price":"$80.12","latitude":-6.3710341,"longitude":105.9039005},
+{"id":6,"name":"Puree - Guava","product_type":73,"quantity":56,"price":"$14.60","latitude":49.7245218,"longitude":16.8754183},
+{"id":7,"name":"Lamb - Leg, Diced","product_type":21,"quantity":83,"price":"$31.42","latitude":-31.413822,"longitude":-64.485902},
+{"id":8,"name":"Pepper - Red Bell","product_type":81,"quantity":21,"price":"$46.15","latitude":56.2094069,"longitude":14.8470274}]
